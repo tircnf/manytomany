@@ -39,6 +39,10 @@ class PersonPetHibernateSpec extends HibernateSpec {
         steve.pets.size()==1
         steve.pets[0].name=="spot"
 
+        and: "back references are set up"
+        spot.owners.size()==1
+        spot.owners[0]==steve
+
         when: "if I reload from database"
         sessionFactory.currentSession.clear()
         Person steve2 = Person.get(steve.id)
